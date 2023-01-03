@@ -1,0 +1,32 @@
+import { getUserByClerkId } from '@/services/auth'
+import prisma from '@/services/db'
+import { NextResponse } from 'next/server'
+import { analyzeEntry } from '@/services/ai'
+
+export const PATCH = async (req: Request, { params }) => {
+  const { content } = await req.json()
+  const analysis = await analyzeEntry(content)
+
+  const user = await getUserByClerkId()
+  if (!user) {
+    console.log('user not found')
+    return NextResponse.json({ error: 'user not found'})
+  }
+
+  const updatedAnalysis = await prisma.entryAnalysis.update({
+    where: {
+      entryId: params.id,
+      userId: user.id,
+    },
+    data: {
+      mood: analysis.mood,
+      subject: analysis.subject,
+      summary: analysis.summary,
+      color: analysis.color,
+      emotion: analysis.emotion,
+      sentimentScore: analysis.sentimentScore,
+      emoji: analysis.emoji || '😐',
+    },
+  })
+  return NextResponse.json({ data: updatedAnalysis })
+}
