@@ -1,7 +1,7 @@
-import { getUserByClerkId } from '@/utils/auth'
-import prisma from '@/utils/db'
+import { getUserByClerkId } from '@/services/auth'
+import prisma from '@/services/db'
 import { NextResponse } from 'next/server'
-import { analyzeEntry } from '@/utils/ai'
+import { analyzeEntry } from '@/services/ai'
 
 export const PATCH = async (req: Request, { params }) => {
   const { content } = await req.json()
@@ -10,7 +10,7 @@ export const PATCH = async (req: Request, { params }) => {
   const user = await getUserByClerkId()
   if (!user) {
     console.log('user not found')
-    return NextResponse.json({ error: 'user not found'})
+    return NextResponse.json({ error: 'user not found' })
   }
 
   const updatedAnalysis = await prisma.entryAnalysis.update({
