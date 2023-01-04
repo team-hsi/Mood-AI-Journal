@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { Toaster } from '@/components/ui/sonner'
 import { ThemeProvider } from '@/components/theme-provider'
 
 import { ClerkProvider } from '@clerk/nextjs'
 import localFont from 'next/font/local'
 import './globals.css'
+import { Toaster } from 'sonner'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

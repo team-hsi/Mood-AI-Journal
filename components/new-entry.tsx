@@ -13,8 +13,8 @@ const NewEntry = () => {
   const router = useRouter()
 
   const handleClick = async () => {
-    const NewEntry = await createNewEntry()
-    router.push(`/journal/${NewEntry.id}`)
+    const newEntry = await createNewEntry()
+    router.push(`/journal/${newEntry.id}`)
   }
   return (
     <TooltipProvider>

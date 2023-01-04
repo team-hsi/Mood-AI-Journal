@@ -76,4 +76,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  .moodBackground {
+    @apply bg-[url('../images/mood.png')] bg-cover bg-center bg-no-repeat;
+  }
+  .moodJournal {
+    @apply bg-[url('../images/mood.png')] bg-contain bg-center bg-no-repeat;
+  }
 }

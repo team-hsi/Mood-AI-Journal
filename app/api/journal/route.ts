@@ -1,5 +1,5 @@
-import { getUserByClerkId } from '@/utils/auth'
-import prisma from '@/utils/db'
+import { getUserByClerkId } from '@/services/auth'
+import prisma from '@/services/db'
 import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 
@@ -7,7 +7,7 @@ export const POST = async () => {
   const user = await getUserByClerkId()
   if (!user) {
     console.log('user not found')
-    return NextResponse.json({ error: 'user not found'})
+    return NextResponse.json({ error: 'user not found' })
   }
 
   const entry = await prisma.journalEntry.create({
@@ -37,7 +37,7 @@ export const GET = async () => {
   const user = await getUserByClerkId()
   if (!user) {
     console.log('user not found')
-    return NextResponse.json({ error: 'user not found'})
+    return NextResponse.json({ error: 'user not found' })
   }
 
   const entries = await prisma.journalEntry.findMany({
