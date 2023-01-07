@@ -1,6 +1,8 @@
 'use server'
 import prisma from '@/services/db'
 import { getUserByClerkId } from '@/services/auth'
+import { currentUser } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
 export const getEntries = async () => {
   const user = await getUserByClerkId()
   if (!user) {
@@ -54,4 +56,23 @@ export const getEntryById = async (id: string) => {
   })
 
   return entry
+}
+
+export const createNewUser = async () => {
+  const user = await currentUser()
+  const match = await prisma.user.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+  })
+  if (!match) {
+    await prisma.user.create({
+      data: {
+        clerkId: user.id,
+        email: user?.emailAddresses[0].emailAddress,
+        name: user.firstName + ' ' + user.lastName,
+      },
+    })
+  }
+  redirect('/journal')
 }
