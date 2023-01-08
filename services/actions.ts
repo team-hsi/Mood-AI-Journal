@@ -1,3 +1,4 @@
+'use server'
 import prisma from '@/services/db'
 import { getUserByClerkId } from '@/services/auth'
 export const getEntries = async () => {
