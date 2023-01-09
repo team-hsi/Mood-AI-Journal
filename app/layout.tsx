@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { Toaster } from '@/components/ui/sonner'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
+import { Toaster } from '@/components/ui/sonner'
+import { ThemeProvider } from '@/components/ThemeProvider'
+
 import { ClerkProvider } from '@clerk/nextjs'
 import localFont from 'next/font/local'
 import './globals.css'
@@ -32,8 +35,11 @@ export default function RootLayout({
       <ClerkProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >            
-        {children}
+        >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+            <Toaster richColors position="top-center" />
+          </ThemeProvider>
         </body>
       </ClerkProvider>
     </html>
