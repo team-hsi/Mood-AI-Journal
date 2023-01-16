@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import { toast } from 'sonner'
-import { updateAnalysis, updateEntry } from '@/utils/api'
-import { Analysis } from '@/types/analysis'
+import { updateAnalysis, updateEntry } from '@/services/api'
+import { Analysis } from '@/services/types'
 
 export function useEditor(initialEntry: { id: string; content: string; analysis: Analysis }) {
   const [content, setContent] = useState(initialEntry.content)

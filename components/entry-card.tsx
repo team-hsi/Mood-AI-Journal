@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import SpotlightCard from '@/components/spotlight-card'
-import { formatTime } from '@/utils/format-date'
+import { formatTime } from '@/services/format-date'
 import Link from 'next/link'
 const EntryCard = ({ entries }) => {
   // const entryDate = useClientFormattedTime()

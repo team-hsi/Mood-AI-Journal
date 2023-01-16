@@ -11,9 +11,9 @@ import {
 } from '@/components/ui/card'
 import ThemeSwitch from '@/components/theme-switch'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import NavLinks from '@/components/nav-links'
-import { SearchDialog } from '@/components/search-dialog'
-import UserAvatar from '@/components/user-avatar'
+import NavLinks from './nav-links'
+import { SearchDialog } from './search-dialog'
+import UserAvatar from './user-avatar'
 export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid h-screen w-full overflow-hidden md:grid-cols-[190px_1fr] lg:grid-cols-[200px_1fr]">
@@ -31,21 +31,6 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
               <NavLinks />
             </nav>
-          </div>
-          <div className="mt-auto p-4">
-            <Card x-chunk="A card with a call to action">
-              <CardHeader className="p-2 pt-0 md:p-4">
-                <CardTitle className="text-[1.02rem]">Like My Work?</CardTitle>
-                <CardDescription className="text-xs">
-                  Check out my other projects and see what else I have to offer!
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-2 pt-0 md:p-4 md:pt-0">
-                <Button size="sm" className="w-full">
-                  Explore More
-                </Button>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
@@ -75,22 +60,6 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
                 </Link>
                 <NavLinks mobile />
               </nav>
-              <div className="mt-auto">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Like My Work?</CardTitle>
-                    <CardDescription>
-                      Check out my other projects and see what else I have to
-                      offer!
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button size="sm" className="w-full">
-                      Explore More
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
             </SheetContent>
           </Sheet>
           <div className="flex h-full w-full flex-1 items-center justify-end gap-5 max-sm:mr-2">

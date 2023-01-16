@@ -1,4 +1,4 @@
-import { getAnalytics } from '@/utils/action'
+import { getAnalytics } from '@/services/actions'
 import Chart from '@/components/chart'
 import { ChartConfig } from '@/components/ui/chart'
 

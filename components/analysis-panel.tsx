@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { LoaderCircle } from 'lucide-react'
-import { Analysis, AnalysisItem } from "@/types/analysis"
-import { formatTime } from "@/utils/format-date"
-import { hexToRGB } from "@/utils/color"
+import { Analysis, AnalysisItem } from "@/services/types"
+import { formatTime } from "@/services/format-date"
+import { hexToRGB } from "@/services/color"
 
 interface AnalysisPanelProps {
   analysis: Analysis

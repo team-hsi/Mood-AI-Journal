@@ -1,6 +1,6 @@
 'use client'
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
-import { createNewEntry } from '@/utils/api'
+import { createNewEntry } from '@/services/api'
 import {
   Tooltip,
   TooltipContent,

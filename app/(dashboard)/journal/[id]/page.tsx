@@ -1,5 +1,5 @@
 import Editor from '@/components/editor'
-import { getEntryById } from '@/utils/action'
+import { getEntryById } from '@/services/actions'
 
 const page = async ({ params }) => {
   const entry = await getEntryById(params.id)

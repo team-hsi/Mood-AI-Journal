@@ -1,14 +1,10 @@
 import type { Metadata } from 'next'
 import { Toaster } from '@/components/ui/sonner'
-import { ThemeProvider } from '@/components/ThemeProvider'
-
-import { Toaster } from '@/components/ui/sonner'
-import { ThemeProvider } from '@/components/ThemeProvider'
+import { ThemeProvider } from '@/components/theme-provider'
 
 import { ClerkProvider } from '@clerk/nextjs'
 import localFont from 'next/font/local'
 import './globals.css'
-import Dashboard from '@/components/dashboard'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -20,14 +16,6 @@ const geistMono = localFont({
   variable: '--font-geist-mono',
   weight: '100 900',
 })
-
-export default function DashboardLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return <Dashboard>{children}</Dashboard>
-}
 
 export const metadata: Metadata = {
   title: 'Mood AI Journal',

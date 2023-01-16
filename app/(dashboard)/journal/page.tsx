@@ -1,6 +1,6 @@
 import EntryCard from '@/components/entry-card'
 import NewEntry from '@/components/new-entry'
-import { getEntries } from '@/utils/action'
+import { getEntries } from '@/services/actions'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 const Page = async () => {

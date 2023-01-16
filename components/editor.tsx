@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button'
 import MobileAnalysisView from '@/components/mobile-analysis-view'
 import { AnalysisPanel } from '@/components/analysis-panel'
 import { ContentEditor } from '@/components/content-editor'
-import { analysisData } from '@/types/analysis'
+import { analysisData } from '@/services/types'
 import { useEditor } from '@/hooks/use-editor'
-import { hexToRGB } from '@/utils/color'
-import { Analysis } from '@/utils/types'
+import { hexToRGB } from '@/services/color'
+import { Analysis } from '@/services/types'
 
 interface EditorProps {
   entry: {

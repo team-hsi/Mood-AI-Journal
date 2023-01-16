@@ -1,6 +1,6 @@
 'use client'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { formatTime } from '@/utils/format-date'
+import { formatTime } from '@/services/format-date'
 import { LoaderCircle } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
