@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server'
 
 export const PATCH = async (req: Request, { params }) => {
   const { content } = await req.json()
-  
 
   const user = await getUserByClerkId()
   if (!user) {

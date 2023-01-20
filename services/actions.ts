@@ -79,7 +79,8 @@ export const createNewUser = async () => {
 }
 
 export const deleteEntry = async (id: string) => {
-  const { userId } = auth()
+  const { userId } = await auth()
+
   try {
     await prisma.journalEntry.delete({
       where: {
@@ -91,7 +92,7 @@ export const deleteEntry = async (id: string) => {
     })
   } catch (e) {
     console.log(e)
-    throw new Error('failed to delete entry.')
+    throw new Error('Failed to delete entry.')
   }
 
   revalidatePath('/journal')
