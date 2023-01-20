@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { LoaderCircle, MoreVertical, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -14,18 +15,22 @@ import { toast } from 'sonner'
 
 export function EntryActions({ entryId }: { entryId: string }) {
   const [isDeleting, setIsDeleting] = useState(false)
+  const router = useRouter()
 
   const handleDeleteEntry = async (e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
-
     setIsDeleting(true)
-    toast.promise(deleteEntry(entryId), {
-      loading: 'Deleting entry...',
-      success: 'Journal Entry deleted 🎉',
-      error: 'Failed to delete entry',
-      finally: () => setIsDeleting(false),
-    })
+    try {
+      await deleteEntry(entryId)
+      toast.success('Entry deleted successfully')
+      setIsDeleting(false)
+      router.refresh()
+    } catch (error) {
+      console.error('Error deleting entry:', error)
+      setIsDeleting(false)
+      toast.error('Failed to delete entry')
+    }
   }
 
   return (
@@ -35,6 +40,7 @@ export function EntryActions({ entryId }: { entryId: string }) {
           variant="ghost"
           size="icon"
           className="h-7 w-7 data-[state=open]:bg-accent"
+          onClick={(e) => e.stopPropagation()}
         >
           <MoreVertical className="h-4 w-4" />
           <span className="sr-only">Open menu</span>

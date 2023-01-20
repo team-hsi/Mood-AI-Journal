@@ -86,24 +86,21 @@ export const deleteEntry = async (id: string) => {
   }
 
   try {
-    const entry = await prisma.journalEntry.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
-        userId_id: {
-          userId: userId,
-          id: id,
-        },
+        clerkId: userId,
       },
     })
 
-    if (!entry) {
-      throw new Error('Entry not found or does not belong to the current user.')
+    if (!user) {
+      throw new Error(`Entry not found or does not belong to the current user.`)
     }
 
     // If the entry exists and belongs to the user, proceed with deletion
     await prisma.journalEntry.delete({
       where: {
         userId_id: {
-          userId: userId,
+          userId: user.id,
           id: id,
         },
       },
