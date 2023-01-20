@@ -6,7 +6,6 @@ import { Card } from '@/components/ui/card'
 import ThemeSwitch from '@/components/theme-switch'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import NavLinks from './nav-links'
-import { SearchDialog } from './search-dialog'
 import UserAvatar from './user-avatar'
 export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
@@ -57,7 +56,6 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             </SheetContent>
           </Sheet>
           <div className="flex h-full w-full flex-1 items-center justify-end gap-5 max-sm:mr-2">
-            <SearchDialog />
             <div className="max-sm:hidden">
               <ThemeSwitch />
             </div>

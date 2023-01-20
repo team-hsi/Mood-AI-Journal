@@ -1,8 +1,9 @@
 'use server'
 import prisma from '@/services/db'
 import { getUserByClerkId } from '@/services/auth'
-import { currentUser } from '@clerk/nextjs/server'
+import { auth, currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 export const getEntries = async () => {
   const user = await getUserByClerkId()
   if (!user) {
@@ -75,4 +76,24 @@ export const createNewUser = async () => {
     })
   }
   redirect('/journal')
+}
+
+export const deleteEntry = async (id: string) => {
+  const { userId } = auth()
+  try {
+    await prisma.journalEntry.delete({
+      where: {
+        userId_id: {
+          userId,
+          id,
+        },
+      },
+    })
+  } catch (e) {
+    console.log(e)
+    throw new Error('failed to delete entry.')
+  }
+
+  revalidatePath('/journal')
+  return { success: true }
 }
