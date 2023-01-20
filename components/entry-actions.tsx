@@ -42,7 +42,7 @@ export function EntryActions({ entryId }: { entryId: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuItem
-          onSelect={handleDeleteEntry}
+          onClick={(e) => handleDeleteEntry(e)}
           disabled={isDeleting}
           className="flex items-center text-destructive focus:text-destructive"
         >
