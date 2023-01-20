@@ -81,20 +81,37 @@ export const createNewUser = async () => {
 export const deleteEntry = async (id: string) => {
   const { userId } = await auth()
 
+  if (!userId) {
+    throw new Error('Unauthorized: User not authenticated.')
+  }
+
   try {
+    const entry = await prisma.journalEntry.findUnique({
+      where: {
+        userId_id: {
+          userId: userId,
+          id: id,
+        },
+      },
+    })
+
+    if (!entry) {
+      throw new Error('Entry not found or does not belong to the current user.')
+    }
+
+    // If the entry exists and belongs to the user, proceed with deletion
     await prisma.journalEntry.delete({
       where: {
         userId_id: {
-          userId,
-          id,
+          userId: userId,
+          id: id,
         },
       },
     })
   } catch (e) {
-    console.log(e)
+    console.error('Error deleting entry:', e)
     throw new Error('Failed to delete entry.')
   }
-
   revalidatePath('/journal')
   return { success: true }
 }
