@@ -1,6 +1,7 @@
 import { generateObject } from 'ai'
 import { google } from '@ai-sdk/google'
 import { z } from 'zod'
+import { moodTags } from './data'
 
 const analyzeEntrySchema = z.object({
   analysis: z.object({
@@ -28,6 +29,9 @@ const analyzeEntrySchema = z.object({
       .max(100)
       .describe('Short, actionable advice aligned with the mood.'),
     language: z.string().describe('Detected language of the journal entry.'),
+    tags: z
+      .array(z.enum(moodTags))
+      .describe('Array of mood tags that apply to the entry.'),
   }),
 })
 
@@ -50,11 +54,16 @@ export const analyzeEntry = async (journalEntry: string, language: string) => {
         7. Emoji: Select one emoji that encapsulates the entry's mood.
         8. Recommendation: Offer a short, actionable suggestion (max 100 characters) tailored to the mood and content.
         9. Language: Detect and specify the language used in the entry.
+        10. Tags: Select 1-3 mood tags from the provided list that best describe the entry's emotional state.
+
+        Mood Tags:
+        ${moodTags.join(', ')}
 
         Remember:
         - Be sensitive and supportive in your analysis.
         - Ensure recommendations are helpful and mood-appropriate.
         - Maintain a non-judgmental tone throughout the analysis.
+        - Choose tags that accurately reflect the nuances of the entry's mood.
 
         Journal Entry:
         "${journalEntry}"
