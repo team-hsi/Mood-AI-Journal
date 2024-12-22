@@ -4,60 +4,62 @@ import { z } from 'zod'
 
 const analyzeEntrySchema = z.object({
   analysis: z.object({
-    mood: z
-      .string()
-      .describe(
-        'The mood of the journal entry or the person who wrote it, must be one word.',
-      ),
-    subject: z.string().describe('The subject or theme of the journal entry.'),
+    mood: z.string().describe('One-word mood of the journal entry or writer.'),
+    subject: z.string().describe('Main subject or theme of the journal entry.'),
     summary: z
       .string()
-      .describe(
-        'A quick summary of the entire entry that directly addresses the writer.',
-      ),
+      .describe('Concise summary addressing the writer directly.'),
     color: z
       .string()
-      .describe(
-        'A hexadecimal color code that represents the mood of the entry.',
-      ),
+      .describe("Hexadecimal color code representing the entry's mood."),
     emotion: z
       .enum(['NEGATIVE', 'NEUTRAL', 'POSITIVE'])
-      .describe(
-        'The emotional tone, whether neutral, positive, or negative (uppercase).',
-      ),
+      .describe('Overall emotional tone.'),
     sentimentScore: z
       .number()
+      .min(-10)
+      .max(10)
       .describe(
-        'Sentiment of the text rated on a scale from -10 to 10, where -10 is extremely negative, 0 is neutral, and 10 is extremely positive.',
+        'Sentiment scale from -10 (very negative) to 10 (very positive).',
       ),
-    emoji: z
+    emoji: z.string().describe("Single emoji representing the entry's mood."),
+    recommendation: z
       .string()
-      .describe(
-        'Emoji that represents the mood of the entry. Example: 😊 for happiness.',
-      ),
-    language: z
-      .string()
-      .describe('The detected language of the journal entry.'),
+      .max(100)
+      .describe('Short, actionable advice aligned with the mood.'),
+    language: z.string().describe('Detected language of the journal entry.'),
   }),
 })
 
 export const analyzeEntry = async (journalEntry: string, language: string) => {
   try {
     const { object } = await generateObject({
-      model: google('gemini-1.5-pro-latest'), // Adjust the model as needed
+      model: google('gemini-1.5-pro-latest'),
       schema: analyzeEntrySchema,
       prompt: `
-        You are an assistant that analyzes journal entries. Respond in ${language}.
-        Analyze the following journal entry and return a JSON object with the following structure:
-        - mood (one word)
-        - subject
-        - summary (addressing the writer)
-        - emoji
-        - color (hex code)
-        - emotion (NEGATIVE, NEUTRAL, POSITIVE)
-        - sentimentScore (-10 to 10)
-        - detected language
-        Journal Entry: ${journalEntry}
+        You are an empathetic AI assistant specializing in analyzing journal entries.
+        Analyze the following journal entry and provide insights. Respond in ${language}.
+
+        Guidelines:
+        1. Mood: Capture the predominant feeling in one word.
+        2. Subject: Identify the main topic or theme.
+        3. Summary: Provide a brief, personalized summary directly addressing the writer.
+        4. Color: Choose a hex color that best represents the entry's mood.
+        5. Emotion: Categorize as NEGATIVE, NEUTRAL, or POSITIVE.
+        6. Sentiment Score: Rate from -10 (extremely negative) to 10 (extremely positive).
+        7. Emoji: Select one emoji that encapsulates the entry's mood.
+        8. Recommendation: Offer a short, actionable suggestion (max 100 characters) tailored to the mood and content.
+        9. Language: Detect and specify the language used in the entry.
+
+        Remember:
+        - Be sensitive and supportive in your analysis.
+        - Ensure recommendations are helpful and mood-appropriate.
+        - Maintain a non-judgmental tone throughout the analysis.
+
+        Journal Entry:
+        "${journalEntry}"
+
+        Provide your analysis in a structured JSON format as per the defined schema.
       `,
     })
 
