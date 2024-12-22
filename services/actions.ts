@@ -96,7 +96,6 @@ export const deleteEntry = async (id: string) => {
       throw new Error(`Entry not found or does not belong to the current user.`)
     }
 
-    // If the entry exists and belongs to the user, proceed with deletion
     await prisma.journalEntry.delete({
       where: {
         userId_id: {
