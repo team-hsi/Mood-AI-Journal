@@ -21,6 +21,7 @@ export const PATCH = async (req: Request, { params }) => {
     },
     data: {
       content,
+      tags: analysis.tags,
       analysis: {
         update: {
           mood: analysis.mood,
