@@ -22,16 +22,38 @@ export function SearchInput({ entries }) {
 
   const filteredEntries = React.useMemo(() => {
     return entries.filter((entry) => {
+      const searchValue = value.toLowerCase()
       const subjectMatch = entry.analysis?.subject
-        .toLowerCase()
-        .includes(value.toLowerCase())
+        ?.toLowerCase()
+        .includes(searchValue)
       const tagMatch = entry.tags.some((tag) =>
-        tag.toLowerCase().includes(value.toLowerCase()),
+        tag.toLowerCase().includes(searchValue),
       )
-      return subjectMatch || tagMatch
+      const contentMatch = entry.content.toLowerCase().includes(searchValue)
+      const moodMatch = entry.analysis?.mood
+        ?.toLowerCase()
+        .includes(searchValue)
+      const summaryMatch = entry.analysis?.summary
+        ?.toLowerCase()
+        .includes(searchValue)
+      const emotionMatch = entry.analysis?.emotion
+        ?.toLowerCase()
+        .includes(searchValue)
+      const sentimentScoreMatch = entry.analysis?.sentimentScore
+        ?.toString()
+        .includes(searchValue)
+
+      return (
+        subjectMatch ||
+        tagMatch ||
+        contentMatch ||
+        moodMatch ||
+        summaryMatch ||
+        emotionMatch ||
+        sentimentScoreMatch
+      )
     })
   }, [entries, value])
-
   const handleSelect = (entryId: string) => {
     setOpen(false)
     router.push(`/journal/${entryId}`)

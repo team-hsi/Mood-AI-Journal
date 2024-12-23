@@ -8,6 +8,8 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import NavLinks from './nav-links'
 import UserAvatar from './user-avatar'
 import { ChatDialog } from './ChatDialog'
+import { JournalOptions } from './journal-options'
+import MoodIcon from './mood-icon'
 export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid h-screen w-full overflow-hidden md:grid-cols-[190px_1fr] lg:grid-cols-[200px_1fr]">
@@ -16,8 +18,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <p className="flex h-6 w-6 items-center gap-4 text-lg">
-                😎
-                <span className="hover:text-primary">Mood</span>
+                <MoodIcon />
               </p>
             </Link>
           </div>
@@ -68,6 +69,9 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
           <Card className="grid h-9 w-9 justify-center max-sm:hidden">
             <UserAvatar />
           </Card>
+          <div className="flex h-full items-center justify-center pr-3 sm:hidden">
+            <JournalOptions mobile={true} />
+          </div>
         </header>
         <main className="flex-1 p-4 pb-0">{children}</main>
       </div>

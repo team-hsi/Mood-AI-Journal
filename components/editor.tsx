@@ -13,9 +13,9 @@ import { analysisData } from '@/services/types'
 import { useEditor } from '@/hooks/use-editor'
 import { hexToRGB } from '@/services/color'
 
-export default function Editor({ entry }) {
+export default function Editor({ entry, user }) {
   const { content, setContent, analysis, analysisLoading, handleNewAnalysis } =
-    useEditor(entry)
+    useEditor(entry, user)
 
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full w-full">

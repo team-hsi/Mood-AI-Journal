@@ -1,3 +1,4 @@
+'use client'
 import {
   Sheet,
   SheetContent,
@@ -7,29 +8,33 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Settings } from 'lucide-react'
-import ResponseLanguage from './lang-select'
+import SelectLanguage from './lang-select'
+import SelectModel from './model-select'
+import { cn } from '@/lib/utils'
+import { useState } from 'react'
 
-export function JournalOptions() {
+export function JournalOptions({ mobile = false }) {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Settings size={20} strokeWidth={1.25} />
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent
+        side={mobile ? 'bottom' : 'right'}
+        className={cn(mobile ? 'h-3/4' : 'h-full')}
+      >
         <SheetHeader>
-          <SheetTitle>Journal Configuration</SheetTitle>
+          <SheetTitle>Journal Settings</SheetTitle>
           <SheetDescription>
-            Update your journal settings here.
+            Choose your preferred language for responses.
           </SheetDescription>
         </SheetHeader>
-        <div className="h-fit py-5">
-          <ResponseLanguage />
+        <div className={cn('flex gap-3 py-4')}>
+          <SelectLanguage />
+          <SelectModel />
         </div>
-        {/* <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter> */}
       </SheetContent>
     </Sheet>
   )

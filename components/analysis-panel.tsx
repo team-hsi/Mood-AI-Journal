@@ -27,7 +27,7 @@ export function AnalysisPanel({
             last analyzed {formatTime(analysis.updatedAt)}
           </p>
         </div>
-        <JournalOptions />
+        <JournalOptions mobile={false} />
       </div>
       <div
         className="moodBackground h-16 w-full rounded-xl"

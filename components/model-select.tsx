@@ -9,9 +9,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { languages } from '@/services/data'
-export default function ResponseLanguage() {
-  const [value, setValue] = useLocalStorage('mood-lang', 'English')
+import { models } from '@/services/data'
+export default function ModelSelection() {
+  const [value, setValue] = useLocalStorage(
+    'mood-model',
+    'gemini-1.5-pro-latest',
+  )
 
   return (
     <Select value={value} onValueChange={setValue}>
@@ -20,10 +23,10 @@ export default function ResponseLanguage() {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Languages</SelectLabel>
-          {languages.map((lang) => (
-            <SelectItem key={lang.value} value={lang.value}>
-              {lang.label}
+          <SelectLabel>Models</SelectLabel>
+          {models.map((model) => (
+            <SelectItem key={model.value} value={model.value}>
+              {model.label}
             </SelectItem>
           ))}
         </SelectGroup>

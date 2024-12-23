@@ -61,9 +61,9 @@ export default function LandingPage() {
                 source of insights to help you grow emotionally and mentally.
               </p>
               <p className="mt-4 font-medium text-gray-800">
-                — Hunde Desalegn <br />
+                — Team HSI <br />
                 <span className="text-gray-600">
-                  Creator of Mood AI Journal
+                  Creators of Mood AI Journal
                 </span>
               </p>
             </article>
