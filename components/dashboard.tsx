@@ -7,6 +7,7 @@ import ThemeSwitch from '@/components/theme-switch'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import NavLinks from './nav-links'
 import UserAvatar from './user-avatar'
+import { ChatDialog } from './ChatDialog'
 export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid h-screen w-full overflow-hidden md:grid-cols-[190px_1fr] lg:grid-cols-[200px_1fr]">
@@ -56,6 +57,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             </SheetContent>
           </Sheet>
           <div className="flex h-full w-full flex-1 items-center justify-end gap-5 max-sm:mr-2">
+            <ChatDialog />
             <div className="max-sm:hidden">
               <ThemeSwitch />
             </div>

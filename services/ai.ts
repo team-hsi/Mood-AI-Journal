@@ -28,10 +28,10 @@ const analyzeEntrySchema = z.object({
       .string()
       .max(100)
       .describe('Short, actionable advice aligned with the mood.'),
-    language: z.string().describe('Detected language of the journal entry.'),
     tags: z
       .array(z.enum(moodTags))
       .describe('Array of mood tags that apply to the entry.'),
+    language: z.string().describe('Detected language of the journal entry.'),
   }),
 })
 
