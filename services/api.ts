@@ -1,5 +1,3 @@
-import { revalidatePath } from 'next/cache'
-
 const createURL = (path: string) => {
   return window.location.origin + path
 }
@@ -14,7 +12,6 @@ export const createNewEntry = async () => {
 
     if (res.ok) {
       const data = await res.json()
-      revalidatePath('/journal')
       return data.data
     }
   } catch (error) {
