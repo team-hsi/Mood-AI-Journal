@@ -15,11 +15,14 @@ export function useEditor(
   const [content, setContent] = useState(initialEntry.content)
   const [analysis, setAnalysis] = useState(initialEntry.analysis)
   const [analysisLoading, setAnalysisLoading] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
 
   useAutosave({
     data: content,
     onSave: async (data) => {
+      setIsSaving(true)
       await updateEntry(initialEntry.id, data)
+      setIsSaving(false)
     },
   })
 
@@ -61,5 +64,6 @@ export function useEditor(
     analysis,
     analysisLoading,
     handleNewAnalysis,
+    isSaving,
   }
 }

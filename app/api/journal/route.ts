@@ -1,6 +1,6 @@
 import { getUserByClerkId } from '@/services/auth'
 import prisma from '@/services/db'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 export const POST = async () => {
@@ -29,8 +29,7 @@ export const POST = async () => {
     },
     include: { analysis: true },
   })
-
-  revalidatePath('/journal')
+  revalidateTag('journal-entries')
   return NextResponse.json({ data: entry })
 }
 

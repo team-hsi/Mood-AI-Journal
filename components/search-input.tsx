@@ -21,39 +21,25 @@ export function SearchInput({ entries }) {
   const router = useRouter()
 
   const filteredEntries = React.useMemo(() => {
-    return entries.filter((entry) => {
-      const searchValue = value.toLowerCase()
-      const subjectMatch = entry.analysis?.subject
-        ?.toLowerCase()
-        .includes(searchValue)
-      const tagMatch = entry.tags.some((tag) =>
-        tag.toLowerCase().includes(searchValue),
-      )
-      const contentMatch = entry.content.toLowerCase().includes(searchValue)
-      const moodMatch = entry.analysis?.mood
-        ?.toLowerCase()
-        .includes(searchValue)
-      const summaryMatch = entry.analysis?.summary
-        ?.toLowerCase()
-        .includes(searchValue)
-      const emotionMatch = entry.analysis?.emotion
-        ?.toLowerCase()
-        .includes(searchValue)
-      const sentimentScoreMatch = entry.analysis?.sentimentScore
-        ?.toString()
-        .includes(searchValue)
+    if (!value) return entries
 
-      return (
-        subjectMatch ||
-        tagMatch ||
-        contentMatch ||
-        moodMatch ||
-        summaryMatch ||
-        emotionMatch ||
-        sentimentScoreMatch
+    const searchTerms = value.toLowerCase().split(' ')
+
+    return entries.filter((entry) => {
+      const fieldsToSearch = [
+        entry.analysis?.subject,
+        entry.analysis?.mood,
+        entry.analysis?.emotion,
+        entry.analysis?.sentimentScore?.toString(),
+        entry.content,
+      ]
+
+      return searchTerms.every((term) =>
+        fieldsToSearch.some((field) => field?.toLowerCase().includes(term)),
       )
     })
   }, [entries, value])
+
   const handleSelect = (entryId: string) => {
     setOpen(false)
     router.push(`/journal/${entryId}`)

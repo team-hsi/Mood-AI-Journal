@@ -19,6 +19,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <p className="flex h-6 w-6 items-center gap-4 text-lg">
                 <MoodIcon />
+                <span className="hover:text-primary">Mood-AI</span>
               </p>
             </Link>
           </div>
