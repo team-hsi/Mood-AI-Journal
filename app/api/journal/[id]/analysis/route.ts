@@ -12,7 +12,7 @@ export const PATCH = async (req: Request, { params }) => {
     console.log('user not found')
   }
 
-  const update = await prisma.journalEntry.update({
+  await prisma.journalEntry.update({
     where: {
       userId_id: {
         userId: user.id,

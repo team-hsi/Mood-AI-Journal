@@ -6,7 +6,7 @@ import { Search } from 'lucide-react'
 
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useEventListener } from 'usehooks-ts'
-import Chat from './chat'
+import Chat from '@/components/chat'
 
 export function ChatDialog() {
   const [open, setOpen] = React.useState(false)
