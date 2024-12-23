@@ -65,7 +65,7 @@ export default function WhatsNew() {
     <div className="min-h-screen bg-background p-8">
       <div className="mx-auto max-w-4xl">
         <h1 className="mb-8 text-center text-5xl font-bold text-primary">
-          What's New in Mood AI Journal? 🚀
+          What&apos;s New in Mood AI Journal? 🚀
         </h1>
         <p className="mb-12 text-center text-xl text-muted-foreground">
           Version 2 is here with groundbreaking updates to elevate your
