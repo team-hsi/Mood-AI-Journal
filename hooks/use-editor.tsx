@@ -40,13 +40,7 @@ export function useEditor(
     toast.promise(promise(), {
       loading: 'Updating analysis...',
       success: (data) => (
-        <div
-          className="w-full rounded-lg border px-4 py-3 text-center"
-          style={{
-            borderColor: data.color,
-            color: data.color,
-          }}
-        >
+        <div className="w-full rounded-lg border border-green-700 px-4 py-3 text-center text-green-700">
           <p className="text-pretty text-sm">
             <span>
               👋 hi {user}, You look {data.mood} {data.emoji} <br />
