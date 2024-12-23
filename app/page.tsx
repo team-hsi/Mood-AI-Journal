@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import NavHeader from '@/components/nav-header'
+import { BlurText } from '@/components/blur-text'
 import { UserReview } from '@/components/user-reviews'
 import { FeatureGrid } from '@/components/feature-grid'
 import Footer from '@/components/footer'
@@ -9,7 +10,6 @@ import AnimatedShinyText from '@/components/ui/animated-shiny-text'
 import SparklesText from '@/components/ui/sparkles-text'
 import { RainbowButton } from '@/components/ui/rainbow-button'
 import Link from 'next/link'
-import GradientText from '@/components/gradiant'
 
 export default function LandingPage() {
   return (
@@ -27,13 +27,12 @@ export default function LandingPage() {
               <span>✨ Introducing Mood AI Journal v2.0</span>
             </AnimatedShinyText>
             {/* Blur Text */}
-            <GradientText
-              colors={['#ffaa40', '#9c40ff', '#ffaa40']}
-              animationSpeed={8}
-              showBorder={false}
-            >
-              A Journal That Understands You
-            </GradientText>
+
+            <BlurText
+              text="A Journal That Understands You"
+              className="mb-6 text-5xl font-extrabold leading-tight md:text-6xl"
+              delay={0}
+            />
             <p className="mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-muted-foreground md:text-xl">
               Transform your journaling with AI insights—track, understand, and
               grow from your reflections.
