@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Input } from './ui/input'
-import { BarChart2, Calendar, Search, Smile } from 'lucide-react'
+import { BarChart2, Calendar, Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 import {
