@@ -68,7 +68,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
               <UserAvatar />
             </div>
           </div>
-          <Card className="grid h-9 w-9 justify-center max-sm:hidden">
+          <Card className="grid h-9 w-9 justify-center rounded-full max-sm:hidden">
             <UserAvatar />
           </Card>
           <div className="flex h-full items-center justify-center pr-3 sm:hidden">
