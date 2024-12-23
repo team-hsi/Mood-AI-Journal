@@ -1,6 +1,6 @@
 import { getUserByClerkId } from '@/services/auth'
 import prisma from '@/services/db'
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 export const POST = async () => {
@@ -17,19 +17,19 @@ export const POST = async () => {
       analysis: {
         create: {
           userId: user.id,
-          mood: 'not analyzed',
-          subject: 'not analyzed',
-          summary: 'No summary available',
+          mood: 'entry not analyzed',
+          subject: 'entry not analyzed',
+          summary: 'entry not analyzed',
           color: '#808080',
           sentimentScore: 0,
           emoji: '😐',
+          recommendation: 'entry not analyzed',
         },
       },
     },
     include: { analysis: true },
   })
-
-  revalidatePath('/journal')
+  revalidateTag('journal-entries')
   return NextResponse.json({ data: entry })
 }
 

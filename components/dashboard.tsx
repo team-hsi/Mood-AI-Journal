@@ -7,17 +7,21 @@ import ThemeSwitch from '@/components/theme-switch'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import NavLinks from './nav-links'
 import UserAvatar from './user-avatar'
+import { ChatDialog } from './ChatDialog'
+import { JournalOptions } from './journal-options'
+import MoodIcon from './mood-icon'
 export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid h-screen w-full overflow-hidden md:grid-cols-[190px_1fr] lg:grid-cols-[200px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
-          <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
-              <p className="flex h-6 w-6 items-center gap-4 text-lg">
-                😎
-                <span className="hover:text-primary">Mood</span>
-              </p>
+          <div className="flex h-14 items-center border border-b px-4 lg:h-[60px] lg:px-4">
+            <Link
+              href="/"
+              className="flex w-full items-center justify-center gap-2 font-semibold"
+            >
+              <MoodIcon />
+              <p className="text-lg hover:text-primary">Mood AI</p>
             </Link>
           </div>
           <div className="flex-1">
@@ -56,6 +60,7 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
             </SheetContent>
           </Sheet>
           <div className="flex h-full w-full flex-1 items-center justify-end gap-5 max-sm:mr-2">
+            <ChatDialog />
             <div className="max-sm:hidden">
               <ThemeSwitch />
             </div>
@@ -63,9 +68,12 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
               <UserAvatar />
             </div>
           </div>
-          <Card className="grid h-9 w-9 justify-center max-sm:hidden">
+          <Card className="grid h-9 w-9 justify-center rounded-full max-sm:hidden">
             <UserAvatar />
           </Card>
+          <div className="flex h-full items-center justify-center pr-3 sm:hidden">
+            <JournalOptions mobile={true} />
+          </div>
         </header>
         <main className="flex-1 p-4 pb-0">{children}</main>
       </div>

@@ -4,15 +4,25 @@ import { toast } from 'sonner'
 import { updateAnalysis, updateEntry } from '@/services/api'
 import { Analysis } from '@/services/types'
 
-export function useEditor(initialEntry: { id: string; content: string; analysis: Analysis }) {
+export function useEditor(
+  initialEntry: {
+    id: string
+    content: string
+    analysis: Analysis
+  },
+  user,
+) {
   const [content, setContent] = useState(initialEntry.content)
   const [analysis, setAnalysis] = useState(initialEntry.analysis)
   const [analysisLoading, setAnalysisLoading] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
 
   useAutosave({
     data: content,
     onSave: async (data) => {
+      setIsSaving(true)
       await updateEntry(initialEntry.id, data)
+      setIsSaving(false)
     },
   })
 
@@ -22,7 +32,9 @@ export function useEditor(initialEntry: { id: string; content: string; analysis:
       const data = await updateAnalysis(initialEntry.id, content)
 
       if (!data) {
-        throw new Error('GoogleGenerativeAIError: Too Many Requests, Resource has been exhausted. Check quota')
+        throw new Error(
+          'GoogleGenerativeAIError: Too Many Requests, Resource has been exhausted. Check quota',
+        )
       }
       setAnalysis(data)
       return data
@@ -30,8 +42,10 @@ export function useEditor(initialEntry: { id: string; content: string; analysis:
 
     toast.promise(promise(), {
       loading: 'Updating analysis...',
-      success: (data) => `You look ${data.mood} ${data.emoji}`,
+      success: (data) => `👋 Hi ${user}, You look ${data.mood} ${data.emoji}
+                        ${data.recommendation}`,
       error: (error) => `${error.toString()}`,
+      duration: 10000,
       finally: () => setAnalysisLoading(false),
     })
   }
@@ -42,6 +56,6 @@ export function useEditor(initialEntry: { id: string; content: string; analysis:
     analysis,
     analysisLoading,
     handleNewAnalysis,
+    isSaving,
   }
 }
-

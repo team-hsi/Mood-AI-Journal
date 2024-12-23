@@ -13,9 +13,15 @@ import { analysisData } from '@/services/types'
 import { useEditor } from '@/hooks/use-editor'
 import { hexToRGB } from '@/services/color'
 
-export default function Editor({ entry }) {
-  const { content, setContent, analysis, analysisLoading, handleNewAnalysis } =
-    useEditor(entry)
+export default function Editor({ entry, user }) {
+  const {
+    content,
+    setContent,
+    analysis,
+    analysisLoading,
+    handleNewAnalysis,
+    isSaving,
+  } = useEditor(entry, user)
 
   return (
     <ResizablePanelGroup direction="horizontal" className="h-full w-full">
@@ -27,12 +33,14 @@ export default function Editor({ entry }) {
           content={content}
           onChange={setContent}
           isMobile={false}
+          isSaving={isSaving}
         />
         <div className="flex h-full flex-col gap-5 sm:hidden">
           <ContentEditor
             content={content}
             onChange={setContent}
             isMobile={true}
+            isSaving={isSaving}
           />
           <MobileAnalysisView
             analysis={analysis}

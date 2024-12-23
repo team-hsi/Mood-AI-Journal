@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import { LoaderCircle } from 'lucide-react'
-import { Analysis, AnalysisItem } from "@/services/types"
-import { formatTime } from "@/services/format-date"
-import { hexToRGB } from "@/services/color"
+import { Analysis, AnalysisItem } from '@/services/types'
+import { formatTime } from '@/services/format-date'
+import { hexToRGB } from '@/services/color'
+import { JournalOptions } from './journal-options'
 
 interface AnalysisPanelProps {
   analysis: Analysis
@@ -19,13 +20,14 @@ export function AnalysisPanel({
 }: AnalysisPanelProps) {
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex h-fit items-center justify-between px-5">
+      <div className="items-top flex h-fit justify-between px-5">
         <div>
           <h3 className="text-lg font-semibold">AI Analysis</h3>
           <p className="text-xs text-muted-foreground">
             last analyzed {formatTime(analysis.updatedAt)}
           </p>
         </div>
+        <JournalOptions mobile={false} />
       </div>
       <div
         className="moodBackground h-16 w-full rounded-xl"
@@ -50,10 +52,9 @@ export function AnalysisPanel({
             Analyzing
           </>
         ) : (
-          "Analyze"
+          'Analyze'
         )}
       </Button>
     </div>
   )
 }
-
