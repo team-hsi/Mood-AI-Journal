@@ -3,14 +3,9 @@ import NewEntry from '@/components/new-entry'
 import { getEntries } from '@/services/actions'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { SearchInput } from '@/components/search-input'
-import { getUserByClerkId } from '@/services/auth'
 
 const Page = async () => {
-  const user = await getUserByClerkId()
-  if (!user) {
-    throw new Error('User not found')
-  }
-  const entries = await getEntries(user.id)
+  const entries = await getEntries()
 
   return (
     <div className="flex h-full w-full flex-col gap-5">

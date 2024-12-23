@@ -41,7 +41,7 @@ export function ChatDialog() {
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="p-5">
+        <DialogContent className="h-[90vh] p-5">
           <Chat />
         </DialogContent>
       </Dialog>

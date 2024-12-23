@@ -4,14 +4,13 @@ import { cn } from '@/lib/utils'
 import { Label } from './ui/label'
 import { Textarea } from './ui/textarea'
 import { useChat } from 'ai/react'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { ScrollArea } from './ui/scroll-area'
 import { useEventListener } from 'usehooks-ts'
 import { toast } from 'sonner'
 // import { WiStars } from 'react-icons/wi'
 const Chat = () => {
   const [error, setError] = useState<string | null>(null)
-  const defaultRows = 1
   const { messages, input, handleInputChange, handleSubmit, isLoading } =
     useChat({
       initialMessages: [
@@ -30,7 +29,6 @@ const Chat = () => {
         )
       },
     })
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -41,17 +39,9 @@ const Chat = () => {
   }
 
   useEventListener('keydown', handleKeyDown)
-  useEffect(() => {
-    const textarea = textareaRef.current
-    if (textarea) {
-      textarea.style.height = 'auto' // Reset height to auto to shrink if necessary
-      textarea.style.height = `${textarea.scrollHeight}px` // Set height based on scrollHeight
-    }
-  }, [input])
   return (
-    <>
-      <ScrollArea className="flex-1">
-        <div></div>
+    <div className="flex h-full flex-col gap-2">
+      <ScrollArea className="max-h-[75vh] flex-1">
         <div className="h-full overflow-auto p-3">
           {messages.map((m) => (
             <div key={m.id} className="my-2 whitespace-pre-wrap">
@@ -115,15 +105,14 @@ const Chat = () => {
         </Label>
         <Textarea
           id="message"
-          ref={textareaRef}
           value={input}
           onChange={handleInputChange}
           placeholder="Type your message here..."
-          rows={defaultRows}
-          className="min-h-[none] resize-none border-0 shadow-none focus-visible:ring-0"
+          rows={2}
+          className="resize-none border-0 shadow-none focus-visible:ring-0"
         />
       </form>
-    </>
+    </div>
   )
 }
 

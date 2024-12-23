@@ -4,25 +4,23 @@ import { getUserByClerkId } from '@/services/auth'
 import { auth, currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import { unstable_cache } from 'next/cache'
-
-export const getEntries = unstable_cache(
-  async (userId: string) => {
-    const entries = await prisma.journalEntry.findMany({
-      where: {
-        userId: userId,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-      include: { analysis: true },
-    })
-
-    return entries
-  },
-  ['journal-entries'],
-  { revalidate: 60, tags: ['journal-entries'] },
-)
+export const getEntries = async () => {
+  const user = await getUserByClerkId()
+  if (!user) {
+    throw new Error('User not found')
+  }
+  const entries = await prisma.journalEntry.findMany({
+    where: {
+      userId: user.id,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: { analysis: true },
+  })
+  revalidatePath('/journal')
+  return entries
+}
 
 export const getAnalytics = async () => {
   const user = await getUserByClerkId()

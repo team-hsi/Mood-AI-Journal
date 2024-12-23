@@ -20,7 +20,9 @@ const NavHeader = () => {
           </SignUpButton>
         </SignedOut>
         <SignedIn>
-          <Button>Get Started</Button>
+          <Link href="/journal">
+            <Button>Get Started</Button>
+          </Link>
         </SignedIn>
         <ThemeSwitch />
       </div>

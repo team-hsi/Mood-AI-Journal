@@ -15,12 +15,13 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
     <div className="grid h-screen w-full overflow-hidden md:grid-cols-[190px_1fr] lg:grid-cols-[200px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
-          <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
-              <p className="flex h-6 w-6 items-center gap-4 text-lg">
-                <MoodIcon />
-                <span className="hover:text-primary">Mood-AI</span>
-              </p>
+          <div className="flex h-14 items-center border border-b px-4 lg:h-[60px] lg:px-4">
+            <Link
+              href="/"
+              className="flex w-full items-center justify-center gap-2 font-semibold"
+            >
+              <MoodIcon />
+              <p className="text-lg hover:text-primary">Mood AI</p>
             </Link>
           </div>
           <div className="flex-1">

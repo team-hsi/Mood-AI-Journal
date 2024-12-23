@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Input } from './ui/input'
-import { Search } from 'lucide-react'
+import { BarChart2, Calendar, Search, Smile } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 import {
@@ -44,7 +44,11 @@ export function SearchInput({ entries }) {
     setOpen(false)
     router.push(`/journal/${entryId}`)
   }
-
+  const getSentimentColor = (score: number) => {
+    if (score > 0.5) return 'text-green-500'
+    if (score < -0.5) return 'text-red-500'
+    return 'text-yellow-500'
+  }
   return (
     <>
       <div
@@ -74,14 +78,33 @@ export function SearchInput({ entries }) {
               <CommandItem
                 key={entry.id}
                 onSelect={() => handleSelect(entry.id)}
+                className="flex flex-col items-start py-3"
               >
-                <div>
+                <div className="flex w-full items-center justify-between">
                   <p className="font-medium">
                     {entry.analysis?.subject || 'No subject'}
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    {entry.content.substring(0, 50)}...
-                  </p>
+                  <span className="text-xs text-muted-foreground">
+                    <Calendar className="mr-1 inline-block h-3 w-3" />
+                    {new Date(entry.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                  {entry.content}
+                </p>
+                <div className="mt-2 flex w-full items-center justify-between text-xs">
+                  <div className="flex items-center gap-4">
+                    <span className="flex items-center">
+                      {entry.analysis.emoji} {entry.analysis?.mood || 'N/A'}
+                    </span>
+                    <span>{entry.analysis?.emotion || 'N/A'}</span>
+                  </div>
+                  <span
+                    className={`flex items-center ${getSentimentColor(entry.analysis?.sentimentScore || 0)}`}
+                  >
+                    <BarChart2 className="mr-1 h-3 w-3" />
+                    {entry.analysis?.sentimentScore?.toFixed(2) || 'N/A'}
+                  </span>
                 </div>
               </CommandItem>
             ))}
