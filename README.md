@@ -2,6 +2,31 @@
 
 Mood AI Journal is an innovative AI-powered web application designed to help users analyze and track their moods over time through journal entries. By leveraging advanced AI for sentiment analysis and emotional insights, the app allows users to gain a deeper understanding of their mental health trends.
 
+---
+
+## 📚 Table of Contents
+
+1. [📄 Documentation](#-documentation)
+2. [🌟 Features](#-features)
+   - [Version 2.0 (Latest)](#version-20-latest)
+   - [Core Features](#core-features)
+3. [🚀 Getting Started](#-getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Installation](#installation)
+4. [🛠️ Built With](#️-built-with)
+5. [🤝 Contributing](#-contributing)
+6. [📄 License](#-license)
+7. [🙏 Acknowledgments](#-acknowledgments)
+8. [📞 Support](#-support)
+
+---
+
+## 📄 Documentation
+
+Find detailed release notes, changelogs, and what's new in Mood AI Journal here on [Notion](https://www.notion.so/Mood-AI-Journal-v2-0-0-154b0e6409d080dea36de575f02a7261?pvs=4).
+
+---
+
 ## 🌟 Features
 
 ### Version 2.0 (Latest)
@@ -23,12 +48,14 @@ Mood AI Journal is an innovative AI-powered web application designed to help use
 - **Data Visualization**: Analytics and doughnut charts derived from sentiment scores.
 - **Authentication**: Secure user authentication through Clerk integration.
 
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 - Node.js (v14 or later)
-- npm or yarn
+- npm, yarn, or pnpm
 - A Clerk account for authentication
 - A Neon Database account
 - A Google Generative AI API key
@@ -37,36 +64,42 @@ Mood AI Journal is an innovative AI-powered web application designed to help use
 
 1. Clone the repository:
 
-   ```
-   git clone https://github.com/yourusername/mood-ai-journal.git
-   cd mood-ai-journal
-   ```
-
-2. Install dependencies:
-
-   ```
-   npm install
+   ```bash
+   git clone https://github.com/team-hsi/Mood-AI-Journal.git
+   cd Mood-AI-Journal
    ```
 
-   or
+2. Install dependencies using your preferred package manager:
 
-   ```
-   yarn install
-   ```
+   - **npm**:
+
+     ```bash
+     npm install
+     ```
+
+   - **yarn**:
+
+     ```bash
+     yarn install
+     ```
+
+   - **pnpm**:
+     ```bash
+     pnpm install
+     ```
 
 3. Set up Prisma:
 
-```
-npx prisma generate
-npx prisma migrate dev --name init
-```
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev --name init
+   ```
 
 4. Set up environment variables:
    Create a `.env.local` file in the root directory and add the following variables:
 
-   ```
-   # Clerk key's
-
+   ```bash
+   # Clerk keys
    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
    CLERK_SECRET_KEY=your_clerk_secret_key
    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
@@ -74,27 +107,35 @@ npx prisma migrate dev --name init
    NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL=/journal
    NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL=/new-user
 
-   # Neon db url
+   # Neon db URL
    DATABASE_URL=your_neon_database_url
 
    # Google
-   GOOGLE_GENERATIVE_AI_API_KEY = your_gemini_api_key
-
+   GOOGLE_GENERATIVE_AI_API_KEY=your_gemini_api_key
    ```
 
 5. Run the development server:
 
-   ```
-   npm run dev
-   ```
+   - **npm**:
 
-   or
+     ```bash
+     npm run dev
+     ```
 
-   ```
-   yarn dev
-   ```
+   - **yarn**:
+
+     ```bash
+     yarn dev
+     ```
+
+   - **pnpm**:
+     ```bash
+     pnpm dev
+     ```
 
 6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+---
 
 ## 🛠️ Built With
 
@@ -102,22 +143,30 @@ npx prisma migrate dev --name init
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
 - [Clerk](https://clerk.dev/) - Authentication and user management
 - [Neon Database](https://neon.tech/) - Serverless Postgres database
-- [AI SDK](https://sdk.vercel.ai/) - Building applications with vercel ai skd through composability
+- [AI SDK](https://sdk.vercel.ai/) - Building applications with Vercel AI SDK through composability
 - [Google Generative AI](https://cloud.google.com/ai-platform) - Advanced AI models for natural language processing
-- [Prisma](https://www.prisma.io/): ORM tool for type-safe database interactions and migrations.
+- [Prisma](https://www.prisma.io/) - ORM tool for type-safe database interactions and migrations.
+
+---
 
 ## 🤝 Contributing
 
 We welcome contributions to Mood AI Journal! Please see our [Contributing Guide](CONTRIBUTING.md) for more details on how to get started.
 
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+---
+
 ## 🙏 Acknowledgments
 
 - Thanks to all contributors who have helped shape Mood AI Journal
-- Special thanks to the open-source community for the amazing tools and libraries that made this project possible
+- Special thanks to the open-source community for the amazing tools and libraries that made this project possible.
+
+---
 
 ## 📞 Support
 
